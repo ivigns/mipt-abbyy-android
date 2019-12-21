@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".DetailedView"
+    android:id="@+id/detailedViewLandscape"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailedView">
+    android:orientation="horizontal"
+    android:visibility="visible">
 
-    <LinearLayout
-        android:id="@+id/detailedViewLandscape"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:visibility="visible">
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/regularMargin"
+        android:layout_marginEnd="@dimen/halfRegularMargin"
+        android:layout_marginTop="@dimen/regularMargin"
+        android:layout_marginBottom="@dimen/regularMargin"
+        android:scaleType="fitCenter"
+        android:src="@drawable/lorem_ipsum"
+        android:contentDescription="@string/image_desc"
+        android:layout_weight="@integer/imageWeightHorizontalPreview"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/regularMargin"
-            android:layout_marginEnd="@dimen/halfRegularMargin"
-            android:layout_marginTop="@dimen/regularMargin"
-            android:layout_marginBottom="@dimen/regularMargin"
-            android:scaleType="fitCenter"
-            android:src="@drawable/lorem_ipsum"
-            android:contentDescription="@string/image_desc"
-            android:layout_weight="@integer/imageWeightHorizontalPreview"/>
+    <TextView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/halfRegularMargin"
+        android:layout_marginEnd="@dimen/regularMargin"
+        android:layout_marginTop="@dimen/regularMargin"
+        android:layout_marginBottom="@dimen/regularMargin"
+        android:text="@string/lorem_ipsum"
+        android:layout_weight="@integer/textWeightHorizontalPreview"/>
 
-        <TextView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/halfRegularMargin"
-            android:layout_marginEnd="@dimen/regularMargin"
-            android:layout_marginTop="@dimen/regularMargin"
-            android:layout_marginBottom="@dimen/regularMargin"
-            android:text="@string/lorem_ipsum"
-            android:layout_weight="@integer/textWeightHorizontalPreview"/>
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
