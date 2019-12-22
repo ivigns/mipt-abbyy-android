@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        this.setTitle("Notes")
+        this.setTitle(R.string.caption_main)
 
         val cardView = findViewById<CardView>(R.id.cardView)
         cardView.setOnClickListener {

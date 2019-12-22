@@ -8,31 +8,34 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zeroMargin"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="4dp"
+        android:layout_marginStart="@dimen/regularMargin"
+        android:layout_marginTop="@dimen/halfRegularMargin"
+        android:layout_marginEnd="@dimen/regularMargin"
+        app:cardCornerRadius="@dimen/cardCornerRadius"
+        app:cardElevation="@dimen/cardElevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="128dp">
+            android:layout_height="@dimen/cardHeightPreview">
 
             <ImageView
                 android:id="@+id/mainImage"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:contentDescription="lorem ipsum"
+                android:layout_width="@dimen/imageWidthPreview"
+                android:layout_height="@dimen/imageHeightPreview"
+                android:layout_marginStart="@dimen/regularMargin"
+                android:layout_marginTop="@dimen/regularMargin"
+                android:layout_marginBottom="@dimen/regularMargin"
+                android:contentDescription="@string/image_desc"
                 android:scaleType="fitCenter"
-                android:src="@drawable/lorem_ipsum"
+                android:src="@drawable/fat_cat"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -40,23 +43,23 @@
                 android:id="@+id/mainDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="2019.09.19"
+                android:layout_marginStart="@dimen/regularMargin"
+                android:layout_marginTop="@dimen/regularMargin"
+                android:text="@string/date"
                 app:layout_constraintStart_toEndOf="@+id/mainImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/mainText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_width="@dimen/zeroMargin"
+                android:layout_height="@dimen/zeroMargin"
+                android:layout_marginStart="@dimen/regularMargin"
+                android:layout_marginTop="@dimen/halfRegularMargin"
+                android:layout_marginEnd="@dimen/regularMargin"
+                android:layout_marginBottom="@dimen/regularMargin"
                 android:ellipsize="end"
-                android:maxLines="4"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:maxLines="@integer/maxLinesPreview"
+                android:text="@string/lorem_ipsum"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/mainImage"

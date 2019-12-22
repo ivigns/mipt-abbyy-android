@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="regularMargin">16dp</dimen>
+    <dimen name="halfRegularMargin">8dp</dimen>
+    <dimen name="zeroMargin">0dp</dimen>
+    <dimen name="textBottomMarginDetailedVertical">89dp</dimen>
+
+    <dimen name="imageHeightPreview">96dp</dimen>
+    <dimen name="imageWidthPreview">96dp</dimen>
+    <dimen name="imageHeightDetailedVertical">252dp</dimen>
+    <dimen name="imageWidthDetailedVertical">203dp</dimen>
+
+    <dimen name="cardElevation">4dp</dimen>
+    <dimen name="cardCornerRadius">2dp</dimen>
+    <dimen name="cardHeightPreview">128dp</dimen>
+    <integer name="maxLinesPreview">4</integer>
+    <integer name="imageWeightHorizontalPreview">5</integer>
+    <integer name="textWeightHorizontalPreview">3</integer>
+</resources>
