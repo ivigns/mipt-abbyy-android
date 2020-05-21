@@ -1,9 +1,9 @@
 package com.github.ivigns.abbyy.android
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.cardview.widget.CardView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,10 +12,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         this.setTitle(R.string.caption_main)
 
-        val cardView = findViewById<CardView>(R.id.cardView)
-        cardView.setOnClickListener {
-            val detailedView = Intent(this, DetailedView::class.java)
-            startActivity(detailedView)
-        }
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = NoteAdapter(NotesRepository.listNotes())
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
 }

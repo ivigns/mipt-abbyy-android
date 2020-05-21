@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/cardHeightPreview"
+    android:layout_marginStart="@dimen/regularMargin"
+    android:layout_marginTop="@dimen/halfRegularMargin"
+    android:layout_marginEnd="@dimen/regularMargin"
+    app:cardCornerRadius="@dimen/cardCornerRadius"
+    app:cardElevation="@dimen/cardElevation"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:background="?selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/cardHeightPreview">
+
+        <ImageView
+            android:id="@+id/noteImage"
+            android:layout_width="@dimen/imageWidthPreview"
+            android:layout_height="@dimen/imageHeightPreview"
+            android:layout_marginStart="@dimen/regularMargin"
+            android:layout_marginTop="@dimen/regularMargin"
+            android:layout_marginBottom="@dimen/regularMargin"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/noteDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/regularMargin"
+            android:layout_marginTop="@dimen/regularMargin"
+            android:text=""
+            app:layout_constraintStart_toEndOf="@+id/noteImage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/noteText"
+            android:layout_width="@dimen/zeroMargin"
+            android:layout_height="@dimen/zeroMargin"
+            android:layout_marginStart="@dimen/regularMargin"
+            android:layout_marginTop="@dimen/halfRegularMargin"
+            android:layout_marginEnd="@dimen/regularMargin"
+            android:layout_marginBottom="@dimen/regularMargin"
+            android:ellipsize="end"
+            android:maxLines="@integer/maxLinesPreview"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/noteImage"
+            app:layout_constraintTop_toBottomOf="@+id/noteDate" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
