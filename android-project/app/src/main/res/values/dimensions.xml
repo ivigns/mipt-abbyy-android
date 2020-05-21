@@ -2,13 +2,13 @@
 <resources>
     <dimen name="regularMargin">16dp</dimen>
     <dimen name="halfRegularMargin">8dp</dimen>
+    <dimen name="quarterRegularMargin">4dp</dimen>
+    <dimen name="threeQuartersRegularMargin">12dp</dimen>
     <dimen name="zeroMargin">0dp</dimen>
     <dimen name="textBottomMarginDetailedVertical">89dp</dimen>
 
     <dimen name="imageHeightPreview">96dp</dimen>
     <dimen name="imageWidthPreview">96dp</dimen>
-    <dimen name="imageHeightDetailedVertical">252dp</dimen>
-    <dimen name="imageWidthDetailedVertical">203dp</dimen>
 
     <dimen name="cardElevation">4dp</dimen>
     <dimen name="cardCornerRadius">2dp</dimen>
