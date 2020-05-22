@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.fragment_note.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NoteViewHolder(itemView: View, private val listener: MainFragment.NoteListener)
+class NoteViewHolder(itemView: View, private val listener: MainFragment.NoteListener?)
     : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
     private var view = itemView
@@ -18,7 +18,7 @@ class NoteViewHolder(itemView: View, private val listener: MainFragment.NoteList
     }
 
     override fun onClick(v: View?) {
-        note?.let{listener.onNoteClick(it.id)}
+        note?.let { listener?.onNoteClick(it.id) }
     }
 
     fun bind(note: Note) {

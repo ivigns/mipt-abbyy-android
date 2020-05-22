@@ -17,24 +17,9 @@ object NoteContract {
     }
 
     private val NOTE_LIST: List<Note> = listOf(
-        Note(
-            1,
-            Date(1581465600000),
-            R.string.note_text_1,
-            R.drawable.cat1
-        ),
-        Note(
-            2,
-            Date(1583020800000),
-            R.string.note_text_2,
-            R.drawable.cat2
-        ),
-        Note(
-            3,
-            Date(1587772800000),
-            R.string.note_text_3,
-            R.drawable.cat3
-        )
+        Note(1, Date(1581465600000), R.string.note_text_1, R.drawable.cat1),
+        Note(2, Date(1583020800000), R.string.note_text_2, R.drawable.cat2),
+        Note(3, Date(1587772800000), R.string.note_text_3, R.drawable.cat3)
     )
 
     fun createTable(db: SQLiteDatabase) {

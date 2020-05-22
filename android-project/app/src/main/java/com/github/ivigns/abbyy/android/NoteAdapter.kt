@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ivigns.abbyy.android.db.Note
 
-class NoteAdapter(private val notes: List<Note>, private val listener: MainFragment.NoteListener)
+class NoteAdapter(private val notes: List<Note>, private val listener: MainFragment.NoteListener?)
     : RecyclerView.Adapter<NoteViewHolder>() {
 
     override fun getItemCount(): Int = notes.size
