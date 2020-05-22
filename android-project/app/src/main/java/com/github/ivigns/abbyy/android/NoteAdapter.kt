@@ -3,6 +3,7 @@ package com.github.ivigns.abbyy.android
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.github.ivigns.abbyy.android.db.Note
 
 class NoteAdapter(private val notes: List<Note>, private val listener: MainFragment.NoteListener)
     : RecyclerView.Adapter<NoteViewHolder>() {

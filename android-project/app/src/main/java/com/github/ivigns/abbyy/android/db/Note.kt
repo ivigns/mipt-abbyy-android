@@ -1,4 +1,4 @@
-package com.github.ivigns.abbyy.android
+package com.github.ivigns.abbyy.android.db
 
 import java.util.*
 

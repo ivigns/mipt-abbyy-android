@@ -23,7 +23,7 @@ class NoteFragment : Fragment() {
         activity?.setTitle(R.string.caption_note)
 
         val noteId = arguments?.getLong(NOTE_ID, 1)
-        val note = NotesRepository.getNoteWithId(noteId ?: 1)
+        val note = App.noteRepository.getNoteWithId(noteId ?: 1)
         if (note != null) {
             view.noteText.setText(note.textId)
             view.noteImage.setImageDrawable(activity?.getDrawable(note.drawableId))

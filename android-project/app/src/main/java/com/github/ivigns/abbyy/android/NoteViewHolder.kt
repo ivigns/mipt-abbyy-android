@@ -2,6 +2,7 @@ package com.github.ivigns.abbyy.android
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.github.ivigns.abbyy.android.db.Note
 import kotlinx.android.synthetic.main.fragment_note.view.*
 import java.text.SimpleDateFormat
 import java.util.*

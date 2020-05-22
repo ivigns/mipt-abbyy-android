@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = NoteAdapter(NotesRepository.listNotes(), activity as NoteListener)
+        recyclerView.adapter = NoteAdapter(App.noteRepository.listNotes(), activity as NoteListener)
         return view
     }
 }
