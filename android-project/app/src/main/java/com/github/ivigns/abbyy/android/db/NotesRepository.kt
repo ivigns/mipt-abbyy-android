@@ -19,7 +19,6 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
     fun listNotes(): List<Note> {
         val notes = mutableListOf<Note>()
         val db = databaseHolder.open() ?: return notes
-        Thread.sleep(1000) // TODO: remove
 
         databaseHolder.use {
             val cursor = db.query(
@@ -44,7 +43,6 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
 
     fun getNoteWithId(id: Long): Note? {
         val db = databaseHolder.open() ?: return null
-        Thread.sleep(1000) // TODO: remove
 
         databaseHolder.use {
             val cursor = db.query(
@@ -67,7 +65,6 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
 
     fun insertNote(image_path: String): Long? {
         val db = databaseHolder.open() ?: return null
-        Thread.sleep(1000) // TODO: remove
 
         databaseHolder.use {
             val values = ContentValues().apply {
