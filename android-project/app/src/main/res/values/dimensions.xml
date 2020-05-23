@@ -16,4 +16,9 @@
     <integer name="maxLinesPreview">4</integer>
     <integer name="imageWeightHorizontalPreview">5</integer>
     <integer name="textWeightHorizontalPreview">3</integer>
+
+    <dimen name="plusMargin">24dp</dimen>
+    <dimen name="plusElevation">6dp</dimen>
+
+    <dimen name="takePictureButtonSize">64dp</dimen>
 </resources>

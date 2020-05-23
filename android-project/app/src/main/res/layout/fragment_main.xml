@@ -12,8 +12,22 @@
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/threeQuartersRegularMargin"
         android:layout_marginEnd="@dimen/threeQuartersRegularMargin"
-        android:layout_marginTop="@dimen/threeQuartersRegularMargin"
-        android:layout_marginBottom="@dimen/regularMargin"
+        android:layout_marginTop="@dimen/halfRegularMargin"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <ImageButton
+        android:id="@+id/plusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/plusMargin"
+        android:layout_marginBottom="@dimen/plusMargin"
+        android:clickable="true"
+        android:elevation="@dimen/plusElevation"
+        android:focusable="true"
+        android:src="@drawable/ic_plus"
+        android:backgroundTint="@color/plusColor"
+        android:background="@drawable/button_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

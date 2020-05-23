@@ -9,7 +9,7 @@ class AppSqliteOpenHelper(context: Context?)
 
     companion object {
         const val DATABASE_NAME = "Notes.db"
-        const val VERSION = 1
+        const val VERSION = 2
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -17,6 +17,7 @@ class AppSqliteOpenHelper(context: Context?)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        NoteContract.createTable(db)
     }
 
 }

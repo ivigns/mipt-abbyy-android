@@ -1,6 +1,8 @@
 package com.github.ivigns.abbyy.android.db
 
+import android.content.ContentValues
 import android.provider.BaseColumns
+import com.github.ivigns.abbyy.android.R
 import java.util.*
 
 class NotesRepository(private val databaseHolder: DatabaseHolder) {
@@ -10,7 +12,7 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
             BaseColumns._ID,
             NoteContract.NoteEntry.DATE,
             NoteContract.NoteEntry.TEXT_ID,
-            NoteContract.NoteEntry.DRAWABLE_ID
+            NoteContract.NoteEntry.DRAWABLE_PATH
         )
     }
 
@@ -30,8 +32,8 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
                         val id = getLong(getColumnIndex(BaseColumns._ID))
                         val date = Date(getLong(getColumnIndex(NoteContract.NoteEntry.DATE)))
                         val text = getInt(getColumnIndex(NoteContract.NoteEntry.TEXT_ID))
-                        val imageId = getInt(getColumnIndex(NoteContract.NoteEntry.DRAWABLE_ID))
-                        notes.add(Note(id, date, text, imageId))
+                        val imagePath = getString(getColumnIndex(NoteContract.NoteEntry.DRAWABLE_PATH))
+                        notes.add(Note(id, date, text, imagePath))
                     }
                 }
             }
@@ -54,12 +56,27 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
                     if (moveToFirst()) {
                         val date = Date(getLong(getColumnIndex(NoteContract.NoteEntry.DATE)))
                         val text = getInt(getColumnIndex(NoteContract.NoteEntry.TEXT_ID))
-                        val imageId = getInt(getColumnIndex(NoteContract.NoteEntry.DRAWABLE_ID))
-                        return Note(id, date, text, imageId)
+                        val imagePath = getString(getColumnIndex(NoteContract.NoteEntry.DRAWABLE_PATH))
+                        return Note(id, date, text, imagePath)
                     }
                     return null
                 }
             }
+        }
+    }
+
+    fun insertNote(image_path: String): Long? {
+        val db = databaseHolder.open() ?: return null
+        Thread.sleep(1000) // TODO: remove
+
+        databaseHolder.use {
+            val values = ContentValues().apply {
+                put(NoteContract.NoteEntry.DATE, Date().time)
+                put(NoteContract.NoteEntry.TEXT_ID, R.string.lorem_ipsum)
+                put(NoteContract.NoteEntry.DRAWABLE_PATH, image_path)
+            }
+            val id = db.insert(NoteContract.TABLE_NAME, null, values)
+            return if (id == -1L) null else id
         }
     }
 

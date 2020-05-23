@@ -23,14 +23,16 @@ class MainActivity : AppCompatActivity(), MainFragment.NoteListener {
 
             fragmentTransaction.commit()
         }
-        if (noteFragment != null) {
-            noteFragment.arguments?.getLong(NoteFragment.NOTE_ID)?.let {
-                onNoteClick(it)
-            }
-        }
+
+        noteFragment?.arguments?.getLong(NoteFragment.NOTE_ID)?.let { onNoteClick(it) }
     }
 
+
     override fun onNoteClick(id: Long) {
+        if (id == NoteFragment.UNDEFINED_NOTE_ID) {
+            return
+        }
+
         supportFragmentManager.popBackStackImmediate(NoteFragment.NOTE_ID,
             FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
@@ -53,6 +55,13 @@ class MainActivity : AppCompatActivity(), MainFragment.NoteListener {
     override fun onBackPressed() {
         super.onBackPressed()
         this.setTitle(R.string.caption_main)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val noteId = intent.getLongExtra(NoteFragment.NOTE_ID, NoteFragment.UNDEFINED_NOTE_ID)
+        intent.removeExtra(NoteFragment.NOTE_ID)
+        onNoteClick(noteId)
     }
 
 }
