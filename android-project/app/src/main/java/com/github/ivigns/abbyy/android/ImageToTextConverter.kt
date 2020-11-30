@@ -14,9 +14,14 @@ object ImageToTextConverter {
             val recognizer = TextRecognition.getClient()
             recognizer.process(image)
                 .addOnSuccessListener { visionText ->
-                    continuation.resume(visionText.text)
+                    val text = visionText.text
+                    if (text.isEmpty()) {
+                        continuation.resume(null)
+                    } else {
+                        continuation.resume(visionText.text)
+                    }
                 }
-                .addOnFailureListener { e ->
+                .addOnFailureListener {
                     continuation.resume(null)
                 }
         }
