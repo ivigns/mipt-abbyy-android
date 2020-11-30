@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.view.View
@@ -83,8 +84,8 @@ class CameraActivity : AppCompatActivity() {
         cameraView?.bindToLifecycle(this as LifecycleOwner)
     }
 
-    private fun imageToText(image_path: String): String {
-        return resources.getString(R.string.lorem_ipsum)
+    private suspend fun imageToText(imageFile: File) = withContext(Dispatchers.IO) {
+        return@withContext ImageToTextConverter.getText(this@CameraActivity, Uri.fromFile(imageFile))
     }
 
     fun takePicture(view: View?) {
@@ -95,7 +96,7 @@ class CameraActivity : AppCompatActivity() {
             object: ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     job = GlobalScope.launch(Dispatchers.Main) {
-                        insertNoteTask(imageToText(file.absolutePath), file.absolutePath)?.let {
+                        insertNoteTask(imageToText(file) ?: "Empty note", file.absolutePath)?.let {
                             val intent = Intent().putExtra(NoteFragment.NOTE_ID, it)
                             setResult(Activity.RESULT_OK, intent)
                         }
@@ -111,8 +112,8 @@ class CameraActivity : AppCompatActivity() {
 
     private fun generatePictureFile() = File(filesDir, UUID.randomUUID().toString())
 
-    private suspend fun insertNoteTask(image_text:String, image_path: String) = withContext(Dispatchers.IO) {
-        return@withContext App.noteRepository.insertNote(image_text, image_path)
+    private suspend fun insertNoteTask(imageText: String, imagePath: String) = withContext(Dispatchers.IO) {
+        return@withContext App.noteRepository.insertNote(imageText, imagePath)
     }
 
     override fun onDestroy() {

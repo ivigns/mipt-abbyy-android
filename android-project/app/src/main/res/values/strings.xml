@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Image Notes</string>
     <string name="date_format">dd.MM.yyyy</string>
     <string name="caption_main">Notes</string>
     <string name="caption_note">Note</string>

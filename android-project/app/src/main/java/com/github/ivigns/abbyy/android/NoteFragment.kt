@@ -32,9 +32,9 @@ class NoteFragment : Fragment() {
         job = GlobalScope.launch(Dispatchers.Main) {
             val note = getNoteWithIdTask(noteId ?: UNDEFINED_NOTE_ID)
             if (note != null) {
-                view.noteText.setText(note.textId)
+                view.noteText.text = note.text
                 Picasso.with(context).load(File(note.drawablePath)).fit().centerInside().into(view.noteImage)
-                view.noteImage.contentDescription = getString(note.textId)
+                view.noteImage.contentDescription = note.text
             }
         }
 

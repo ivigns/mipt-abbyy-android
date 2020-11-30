@@ -9,7 +9,7 @@ object NoteContract {
 
     object NoteEntry: BaseColumns {
         const val DATE = "date"
-        const val TEXT_ID = "text_id"
+        const val TEXT = "text"
         const val DRAWABLE_PATH = "drawable_path"
     }
 
@@ -19,7 +19,7 @@ object NoteContract {
             "CREATE TABLE $TABLE_NAME (" +
                     "${BaseColumns._ID} INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "${NoteEntry.DATE} INTEGER NOT NULL," +
-                    "${NoteEntry.TEXT_ID} INTEGER NOT NULL," +
+                    "${NoteEntry.TEXT} TEXT NOT NULL," +
                     "${NoteEntry.DRAWABLE_PATH} TEXT NOT NULL)"
         )
     }

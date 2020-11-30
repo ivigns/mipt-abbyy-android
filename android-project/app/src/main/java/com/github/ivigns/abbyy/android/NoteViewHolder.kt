@@ -25,12 +25,12 @@ class NoteViewHolder(itemView: View, private val listener: MainFragment.NoteList
 
     fun bind(note: Note) {
         this.note = note
-        view.noteText.setText(note.textId)
+        view.noteText.text = note.text
         view.noteDate.text = SimpleDateFormat(view.context.getString(R.string.date_format),
             Locale.UK).format(note.date)
         Picasso.with(view.context).load(File(note.drawablePath)).fit().centerInside()
             .into(view.noteImage)
-        view.noteImage.contentDescription = view.context.getString(note.textId)
+        view.noteImage.contentDescription = note.text
     }
 
 }
