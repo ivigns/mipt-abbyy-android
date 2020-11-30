@@ -72,7 +72,19 @@ class CameraActivity : AppCompatActivity() {
     private fun startCamera() {
         cameraView = findViewById(R.id.cameraView)
         cameraView?.captureMode = CameraView.CaptureMode.IMAGE
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            Toast.makeText(this, R.string.need_permission, Toast.LENGTH_SHORT).show()
+            finish()
+        }
         cameraView?.bindToLifecycle(this as LifecycleOwner)
+    }
+
+    private fun imageToText(image_path: String): String {
+        return resources.getString(R.string.lorem_ipsum)
     }
 
     fun takePicture(view: View?) {
@@ -83,7 +95,7 @@ class CameraActivity : AppCompatActivity() {
             object: ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     job = GlobalScope.launch(Dispatchers.Main) {
-                        insertNoteTask(file.absolutePath)?.let {
+                        insertNoteTask(imageToText(file.absolutePath), file.absolutePath)?.let {
                             val intent = Intent().putExtra(NoteFragment.NOTE_ID, it)
                             setResult(Activity.RESULT_OK, intent)
                         }
@@ -99,8 +111,8 @@ class CameraActivity : AppCompatActivity() {
 
     private fun generatePictureFile() = File(filesDir, UUID.randomUUID().toString())
 
-    private suspend fun insertNoteTask(image_path: String) = withContext(Dispatchers.IO) {
-        return@withContext App.noteRepository.insertNote(image_path)
+    private suspend fun insertNoteTask(image_text:String, image_path: String) = withContext(Dispatchers.IO) {
+        return@withContext App.noteRepository.insertNote(image_text, image_path)
     }
 
     override fun onDestroy() {

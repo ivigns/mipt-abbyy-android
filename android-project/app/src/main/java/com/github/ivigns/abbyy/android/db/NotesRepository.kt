@@ -63,13 +63,13 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
         }
     }
 
-    fun insertNote(image_path: String): Long? {
+    fun insertNote(image_text:String, image_path: String): Long? {
         val db = databaseHolder.open() ?: return null
 
         databaseHolder.use {
             val values = ContentValues().apply {
                 put(NoteContract.NoteEntry.DATE, Date().time)
-                put(NoteContract.NoteEntry.TEXT_ID, R.string.lorem_ipsum)
+                put(NoteContract.NoteEntry.TEXT_ID, image_text)
                 put(NoteContract.NoteEntry.DRAWABLE_PATH, image_path)
             }
             val id = db.insert(NoteContract.TABLE_NAME, null, values)
