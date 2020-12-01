@@ -10,4 +10,6 @@
     <string name="popup_delete_confirm">Are you sure you want to delete the note?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="empty_note">No text.</string>
+    <string name="popup_loading">Loading…</string>
 </resources>

@@ -2,6 +2,7 @@ package com.github.ivigns.abbyy.android
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -27,6 +28,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     var cameraView: CameraView? = null
+    var popupLoading: AlertDialog? = null
     var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,10 +98,12 @@ class CameraActivity : AppCompatActivity() {
             object: ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                     job = GlobalScope.launch(Dispatchers.Main) {
-                        insertNoteTask(imageToText(file) ?: "Empty note", file.absolutePath)?.let {
+                        val text = imageToText(file) ?: getString(R.string.empty_note)
+                        insertNoteTask(text, file.absolutePath)?.let {
                             val intent = Intent().putExtra(NoteFragment.NOTE_ID, it)
                             setResult(Activity.RESULT_OK, intent)
                         }
+                        popupLoading?.dismiss()
                         finish()
                     }
                 }
@@ -108,6 +112,9 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
         )
+        popupLoading = AlertDialog.Builder(this@CameraActivity)
+            .setMessage(R.string.popup_loading)
+            .show()
     }
 
     private fun generatePictureFile() = File(filesDir, UUID.randomUUID().toString())
@@ -119,5 +126,6 @@ class CameraActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         job?.cancel()
+        popupLoading?.dismiss()
     }
 }

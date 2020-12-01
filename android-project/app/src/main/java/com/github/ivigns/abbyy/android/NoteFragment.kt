@@ -3,6 +3,7 @@ package com.github.ivigns.abbyy.android
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,7 @@ class NoteFragment : Fragment() {
                     startActivityForResult(intent, Activity.RESULT_FIRST_USER)
                 }
                 view.noteText.text = note.text
+                view.noteText.movementMethod = ScrollingMovementMethod()
                 Picasso.with(context).load(File(note.drawablePath)).fit().centerInside().into(view.noteImage)
                 view.noteImage.contentDescription = note.text
             }
