@@ -2,6 +2,7 @@ package com.github.ivigns.abbyy.android.db
 
 import android.content.ContentValues
 import android.provider.BaseColumns
+import java.io.File
 import java.util.*
 
 class NotesRepository(private val databaseHolder: DatabaseHolder) {
@@ -73,6 +74,18 @@ class NotesRepository(private val databaseHolder: DatabaseHolder) {
             }
             val id = db.insert(NoteContract.TABLE_NAME, null, values)
             return if (id == -1L) null else id
+        }
+    }
+
+    fun deleteNote(id: Long) {
+        val note = getNoteWithId(id)
+        val db = databaseHolder.open() ?: return
+
+        databaseHolder.use {
+            db.delete(NoteContract.TABLE_NAME, "${BaseColumns._ID} = ?", arrayOf(id.toString()))
+            note?.let {
+                File(note.drawablePath).delete()
+            }
         }
     }
 

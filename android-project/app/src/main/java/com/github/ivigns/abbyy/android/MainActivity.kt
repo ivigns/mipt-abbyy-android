@@ -1,10 +1,16 @@
 package com.github.ivigns.abbyy.android
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity(), MainFragment.NoteListener {
+
+    var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -12,15 +18,10 @@ class MainActivity : AppCompatActivity(), MainFragment.NoteListener {
         this.setTitle(R.string.caption_main)
 
         val noteFragment = supportFragmentManager.findFragmentByTag(NoteFragment.TAG)
-        val twoFragmentsOnScreen = !(resources.getBoolean(R.bool.isPhone) ||
-                resources.getBoolean(R.bool.isPortrait))
 
-        if ((noteFragment == null) || twoFragmentsOnScreen) {
+        if ((noteFragment == null) || isTwoFragmentLayout()) {
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-
-            val fragment = if (twoFragmentsOnScreen) R.id.mainListContainer else R.id.mainContainer
-            fragmentTransaction.replace(fragment, MainFragment())
-
+            fragmentTransaction.replace(getMainFragmentId(), MainFragment())
             fragmentTransaction.commit()
         }
 
@@ -52,6 +53,39 @@ class MainActivity : AppCompatActivity(), MainFragment.NoteListener {
         fragmentTransaction.commit()
     }
 
+    override fun onShareNote(id: Long) {
+        job = GlobalScope.launch(context = Dispatchers.Main) {
+            val note = getNoteWithIdTask(id) ?: return@launch
+            val sendIntent = Intent(Intent.ACTION_SEND)
+            sendIntent.putExtra(Intent.EXTRA_TEXT, note.text)
+            sendIntent.type = "text/plain"
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
+    }
+
+    override fun onDeleteNote(id: Long) {
+        AlertDialog.Builder(this)
+            .setMessage(getString(R.string.popup_delete_confirm))
+            .setPositiveButton(R.string.yes) {_, _ ->
+                job = GlobalScope.launch(context = Dispatchers.Main) {
+                    App.noteRepository.deleteNote(id)
+                    findViewById<RecyclerView>(R.id.recyclerView)?.let {
+                        val mainFragment = supportFragmentManager.findFragmentById(getMainFragmentId()) as MainFragment?
+                        mainFragment?.onResume()
+                        val noteFragment = supportFragmentManager.findFragmentByTag(NoteFragment.TAG)
+                        noteFragment?.arguments?.getLong(NoteFragment.NOTE_ID)?.let {
+                            if (it == id) {
+                                onBackPressed()
+                            }
+                        }
+                    }
+                }
+            }
+            .setNegativeButton(R.string.no) {_, _ ->}
+            .show()
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         this.setTitle(R.string.caption_main)
@@ -62,6 +96,18 @@ class MainActivity : AppCompatActivity(), MainFragment.NoteListener {
         val noteId = intent.getLongExtra(NoteFragment.NOTE_ID, NoteFragment.UNDEFINED_NOTE_ID)
         intent.removeExtra(NoteFragment.NOTE_ID)
         onNoteClick(noteId)
+    }
+
+    private fun isTwoFragmentLayout(): Boolean {
+        return !(resources.getBoolean(R.bool.isPhone) || resources.getBoolean(R.bool.isPortrait))
+    }
+
+    private fun getMainFragmentId(): Int {
+        return if (isTwoFragmentLayout()) R.id.mainListContainer else R.id.mainContainer
+    }
+
+    private suspend fun getNoteWithIdTask(id: Long) = withContext(Dispatchers.IO) {
+        return@withContext App.noteRepository.getNoteWithId(id)
     }
 
 }

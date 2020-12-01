@@ -21,4 +21,6 @@
     <dimen name="plusElevation">6dp</dimen>
 
     <dimen name="takePictureButtonSize">64dp</dimen>
+
+    <dimen name="optionsButtonSize">24dp</dimen>
 </resources>

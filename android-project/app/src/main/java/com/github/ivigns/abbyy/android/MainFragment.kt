@@ -1,6 +1,7 @@
 package com.github.ivigns.abbyy.android
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,8 @@ class MainFragment : Fragment() {
 
     interface NoteListener {
         fun onNoteClick(id: Long)
+        fun onShareNote(id: Long)
+        fun onDeleteNote(id: Long)
     }
 
     override fun onCreateView(

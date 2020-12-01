@@ -23,7 +23,7 @@ import java.util.*
 class CameraActivity : AppCompatActivity() {
 
     companion object {
-        const val CAMERA_REQUEST_CODE = 0;
+        const val CAMERA_REQUEST_CODE = 0
     }
 
     var cameraView: CameraView? = null
