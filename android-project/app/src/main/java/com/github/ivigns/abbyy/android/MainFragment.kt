@@ -1,7 +1,6 @@
 package com.github.ivigns.abbyy.android
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -54,9 +53,11 @@ class MainFragment : Fragment() {
     }
 
     private fun startLoadingNotes(recyclerView: RecyclerView) {
+        val scroll = recyclerView.scrollY
         GlobalScope.launch(Dispatchers.Main) {
             recyclerView.adapter = NoteAdapter(listNotesTask(), activity as NoteListener?)
         }
+        recyclerView.scrollY = scroll
     }
 
     override fun onResume() {

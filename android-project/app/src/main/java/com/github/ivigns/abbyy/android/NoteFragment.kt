@@ -1,5 +1,7 @@
 package com.github.ivigns.abbyy.android
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +34,11 @@ class NoteFragment : Fragment() {
         job = GlobalScope.launch(Dispatchers.Main) {
             val note = getNoteWithIdTask(noteId ?: UNDEFINED_NOTE_ID)
             if (note != null) {
+                view.noteImage.setOnClickListener {
+                    val intent = Intent(activity, ImageActivity::class.java)
+                    intent.putExtra(NOTE_ID, noteId)
+                    startActivityForResult(intent, Activity.RESULT_FIRST_USER)
+                }
                 view.noteText.text = note.text
                 Picasso.with(context).load(File(note.drawablePath)).fit().centerInside().into(view.noteImage)
                 view.noteImage.contentDescription = note.text
